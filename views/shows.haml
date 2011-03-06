@@ -1,0 +1,9 @@
+%h1 Upcoming appearances
+
+%ol#shows
+  -@shows.each do |show|
+    %li
+      -date=Time.parse(show['startDate'])
+      %h3
+        %a{:href => show['url'], :title => "View event on Last.fm"}=date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} &mdash; %I:%M%p")
+      %p=[show['venue']['name'], show['venue']['location']['city']].reject { |s| s.empty? }.join('<br />')

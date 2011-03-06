@@ -1,0 +1,11 @@
+config:
+  :lastfm:
+    :artist: 'The Outdoor Types'
+    :api_key: xxx
+    :api_secret: xxx
+    
+  :tumblr:
+    :email: "tumblr@example.com"
+    :password: "password"
+    :reviews: "reviews"
+    :about: "about"

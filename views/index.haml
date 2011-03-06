@@ -1,0 +1,38 @@
+#intro.span_9.col_1.section
+  %h2 Hello, we are The Outdoor Types.
+  
+#gigs.section.span_4.col_2
+  %h2 Upcoming shows
+  -if @shows.empty?
+    %p We're not touring at the moment. 
+    %p 
+      Interested in booking us?
+      =succeed(".") do
+        %a{:href => "mailto:bookings@theoutdoortypes.co.uk"}Get in touch
+  -else
+    %ol#shows
+      -show_gigs = 2
+      -@shows[0...show_gigs].each do |gig|
+        %li
+          -date=Time.parse(gig['startDate'])
+          %h3
+            %a{:href => gig['url'], :title => "View event on Last.fm"}=date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} &mdash; %I:%M%p")
+          %p=[gig['venue']['name'], gig['venue']['location']['city']].reject { |s| s.empty? }.join('<br />')
+          
+    %p
+      %a{:href => "shows"}
+        -if @shows.length > show_gigs
+          ==plus #{@shows.length - show_gigs} more appearances...
+        -else
+          See all shows
+
+#review.section.span_4.col_2
+  %blockquote=@review.quote
+  %p.source=@review.source
+  %p 
+    %a{:href => "reviews"}See all reviews
+          
+#listen.section.span_4.col_2
+  %p Jangler Swifteye
+  
+  
