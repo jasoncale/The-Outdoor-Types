@@ -1,1 +1,4 @@
 config.yml
+.bundle
+log/*
+tmp/*
