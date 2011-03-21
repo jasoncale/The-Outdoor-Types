@@ -7,11 +7,10 @@ require 'tumblr'
 require 'bandcamp'
 require 'yaml'
 
-
 module Outdoortypes
   class Site < Sinatra::Base
     set :haml, :format => :html5
-    
+            
     get '/' do
       @shows = Outdoortypes::Event.get
       @review = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote).sort_by { rand }.first
@@ -37,6 +36,20 @@ module Outdoortypes
       @reviews = Tumblr::Reader.get_posts(content, :quote)
       haml :reviews
     end
+    
+    get '/music' do
+      @discography = band.discography.sort_by {|album| album['release_date'] }.reverse      
+      haml :music
+    end
+    
+    get '/music/:name' do
+      @album = load_album(params[:name])
+      if @album
+        haml :album
+      else
+        not_found
+      end
+    end
 
     get '/style.css' do
       less :stylesheet
@@ -44,6 +57,17 @@ module Outdoortypes
     
     def tumblr_content(name, opts = {})
       @tumblr_content ||= Outdoortypes::TumblrBlog.get(name, opts)
+    end
+    
+    def band
+      Bandcamp::Base.api_key = config[:bandcamp][:api_key]  
+      @band = Bandcamp::Band.load(config[:bandcamp][:band_id])
+    end
+    
+    def load_album(name)
+      if album = band.discography.select {|album| album['title'].downcase.gsub(/\s/, '-') == name }.first
+        album = Bandcamp::Album.load(album['album_id'])
+      end
     end
     
     def config

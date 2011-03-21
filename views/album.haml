@@ -1,0 +1,10 @@
+%h2=@album.title
+#artwork 
+  %img{:src => @album.large_art_url}
+
+%ol
+  -@album.tracks.each do |track|
+    %li
+      %p=track.title      
+      -track_dom = "track-#{track.track_id}"
+      %a.player{:id => track_dom, :href => track.streaming_url}Listen
