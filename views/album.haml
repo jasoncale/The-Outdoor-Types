@@ -2,9 +2,12 @@
 #artwork 
   %img{:src => @album.large_art_url}
 
-%ol
+%ol#track-listing
   -@album.tracks.each do |track|
     %li
-      %p=track.title      
+      %p=track.title
       -track_dom = "track-#{track.track_id}"
-      %a.player{:id => track_dom, :href => track.streaming_url}Listen
+      -if track.streaming_url.blank?
+        %span.no-streaming Not available
+      -else
+        %a.track{:id => track_dom, :href => track.streaming_url, "data-duration" => track.duration }Listen

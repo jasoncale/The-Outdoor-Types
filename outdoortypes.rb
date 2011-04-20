@@ -30,11 +30,11 @@ module Outdoortypes
       haml :shows
     end
     
-    get '/reviews' do
+    get '/press' do
       content = tumblr_content(config[:tumblr][:reviews])
       @title = content['tumblr']['tumblelog']['title']
       @reviews = Tumblr::Reader.get_posts(content, :quote)
-      haml :reviews
+      haml :press
     end
     
     get '/music' do
@@ -65,7 +65,7 @@ module Outdoortypes
     end
     
     def load_album(name)
-      if album = band.discography.select {|album| album['title'].downcase.gsub(/\s/, '-') == name }.first
+      if band && band.discography && album = band.discography.select {|album| album['title'].downcase.gsub(/\s/, '-') == name }.first
         album = Bandcamp::Album.load(album['album_id'])
       end
     end
