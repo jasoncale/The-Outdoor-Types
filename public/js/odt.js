@@ -1,3 +1,10 @@
+$.fn.backgroundImage = function () {
+  var imageUrl = $(this).attr("data-img-src");
+  if (imageUrl) {
+    $(this).html($("<img src='"+ imageUrl +"'>"));
+  };
+}
+
 var tracks = [];
 $(document).ready(function() {
   $('.track').each(function () {
@@ -26,4 +33,7 @@ $(document).ready(function() {
       tracks.push(player);
     }
   });
+  
+  // $("#background-image").backgroundImage();
+  
 });

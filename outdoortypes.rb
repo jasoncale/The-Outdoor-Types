@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'haml'
-require 'less'
+require 'sass'
 require 'lastfm'
 require 'tumblr'
 require 'bandcamp'
@@ -14,13 +14,16 @@ module Outdoortypes
     get '/' do
       @shows = Outdoortypes::Event.get
       @review = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote).sort_by { rand }.first
+      @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:about], :num => 2), :photo).sort_by { rand }.first
+      @news = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:news], :num => 2)) || []
+      @blog_url = "http://#{config[:tumblr][:news]}.tumblr.com"
       haml :index
     end
     
     get '/about' do
       content = tumblr_content(config[:tumblr][:about], :num => 2)
       @title = content['tumblr']['tumblelog']['title']
-      @image = Tumblr::Reader.get_posts(content, :photo).first
+      @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
       @body = Tumblr::Reader.get_posts(content, :regular).first
       haml :about
     end
@@ -52,11 +55,11 @@ module Outdoortypes
     end
 
     get '/style.css' do
-      less :stylesheet
+      scss :stylesheet
     end
     
     def tumblr_content(name, opts = {})
-      @tumblr_content ||= Outdoortypes::TumblrBlog.get(name, opts)
+      Outdoortypes::TumblrBlog.get(name, opts)
     end
     
     def band

@@ -10,24 +10,28 @@
       <!--[if gte IE 7]><!-->
         <link rel="stylesheet" href="/style.css" type="text/css" media="screen">    
       <!-- <![endif]-->
-  %body
-    #page.group
-      #header
-        %h2#logo
+  %body  
+    #background-image{"data-img-src" => "/images/bg.jpg"}
+    #page.container.clearfix
+      #header.grid_16
+        %h1#logo
           %a{:href => "/"}The Outdoor Types
-        %ul#navigation.group
-          %li
-            %a{:href => "http://theoutdoortypes.tumblr.com"}Blog
-          %li
-            %a{:href => "/about"}About
-          %li
-            %a{:href => "/music"}Music
-          %li
-            %a{:href => "/shows"}Shows            
-          %li
-            %a{:href => "/press"}Press
           
-      #content.group
+        %p.note.grid_4 set your burning sails upon this land
+        %ul#navigation.clearfix
+          %li.grid_1
+            %a{:href => "http://theoutdoortypes.tumblr.com"}News
+          %li.grid_1
+            %a{:href => "/about"}About
+          %li.grid_1
+            %a{:href => "/music"}Records
+          %li.grid_1
+            %a{:href => "/shows"}Shows
+            %li.grid_1
+              %a{:href => "http://twitter.com/theoutdoortypes"}Twitter
+          %li.grid_1
+            %a{:href => "/contact"}Contact
+      #content.grid_16
         = yield
     
     %script{:src=> "http://code.jquery.com/jquery-1.5.min.js", :type => "text/javascript", :charset => "utf-8"}

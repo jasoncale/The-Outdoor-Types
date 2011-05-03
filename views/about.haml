@@ -1,4 +1,7 @@
-#about.span_9.col_1.section
-  %h1=@title
-  %img{:src => @image.source }
-  =@body.body
+#primary.grid_8
+  #band-image.section
+    %img{:src => @image.source }
+
+  .copy-block.section
+    %h2=@title
+    =@body.body
