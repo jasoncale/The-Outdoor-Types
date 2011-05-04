@@ -174,11 +174,14 @@ a:hover {
     background: rgba(0,0,0,0.1);
     padding: 0;
     margin: 0;
-
+    
     li {
       padding: 0 12px 0 0;
       float: left;
-    
+      -moz-transition: background-color 0.3s linear;  /* FF3.7+ */
+      -o-transition: background-color 0.3s linear;  /* Opera 10.5 */
+      -webkit-transition: background-color 0.3s linear;  /* Saf3.2+, Chrome */
+      
       a {
         font-family: "droid-sans-1","droid-sans-2",sans-serif;
         color: #fff;
@@ -195,7 +198,8 @@ a:hover {
     }
     
     li:hover {
-      background: #fff;      
+      background: #fff;
+         
       a {
         color: #900022;
       }
