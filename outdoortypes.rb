@@ -14,21 +14,24 @@ module Outdoortypes
     get '/' do
       @shows = Outdoortypes::Event.get
       @review = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote).sort_by { rand }.first
-      @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:about], :num => 2), :photo).sort_by { rand }.first
+      @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:about]), :photo).sort_by { rand }.first
       @news = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:news], :num => 2)) || []
       @blog_url = "http://#{config[:tumblr][:news]}.tumblr.com"
       haml :index
     end
     
     get '/about' do
-      content = tumblr_content(config[:tumblr][:about], :num => 2)
+      content = tumblr_content(config[:tumblr][:about])
       @title = content['tumblr']['tumblelog']['title']
       @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
-      @body = Tumblr::Reader.get_posts(content, :regular).first
+      @about = Tumblr::Reader.get_posts(content, :regular).first
+      @reviews = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote)
+      
       haml :about
     end
     
     get '/shows' do
+      @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:shows]), :photo).sort_by { rand }.first
       @shows = Outdoortypes::Event.get
       haml :shows
     end
@@ -46,6 +49,7 @@ module Outdoortypes
     end
     
     get '/music/:name' do
+      @discography = band.discography.reject { |album| album['title'].downcase.gsub(/\s/, '-') == params[:name] }.sort_by {|album| album['release_date'] }.reverse
       @album = load_album(params[:name])
       if @album
         haml :album

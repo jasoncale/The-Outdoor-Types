@@ -1,11 +1,22 @@
-#primary.grid_8
-  #upcoming-shows.section
-    %h2 Upcoming appearances
-
-    %ol#shows
-      -@shows.each do |show|
-        %li
-          -date=Time.parse(show['startDate'])
-          %h4
-            %a{:href => show['url'], :title => "View event on Last.fm"}=date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} &mdash; %I:%M%p")
-          %h3=[show['venue']['name'], show['venue']['location']['city']].reject { |s| s.empty? }.join('<br />')
+.sixcol
+  %h1 Upcoming shows
+  
+  .frame
+    %img{:src => @image.source }
+  
+- if @shows.empty?
+  .sixcol.last
+    %h2 Sorry, our diary is empty
+    %p 
+      Why don't you 
+      %a{:href => "/contact", :title => "Contact the band"}get in touch 
+      and get us to come play near you.
+-else 
+  %ol#shows.sixcol.last
+    -@shows.each do |show|
+      %li
+        -date=Time.parse(show['startDate'])
+        %h3
+          %a{:href => show['url'], :title => "View event on Last.fm"}=[show['venue']['name'], show['venue']['location']['city']].reject { |s| s.empty? }.join(', ')
+        %p
+          =date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} at %I:%M%p")

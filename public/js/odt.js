@@ -1,10 +1,3 @@
-$.fn.backgroundImage = function () {
-  var imageUrl = $(this).attr("data-img-src");
-  if (imageUrl) {
-    $(this).html($("<img src='"+ imageUrl +"'>"));
-  };
-}
-
 var tracks = [];
 $(document).ready(function() {
   $('.track').each(function () {
@@ -16,16 +9,17 @@ $(document).ready(function() {
         file: $(this).attr('href'),
         provider: "sound",
         height: 24,
+        width: 250,
         dock: false,
         controlbar: "bottom",
         "playlist.position" : "none",
-        backcolor: "000000",
-        frontcolor: "EEEEEE"
+        backcolor: "ffffff",
+        frontcolor: "333333",
+        wmode: "transparent"
       }).onPlay(function () {
         var currentId = this.id;
         $(tracks).each(function () {
           if (this.id != currentId && this.getState() == "PLAYING") {
-            console.log("pausing");
             this.pause();
           };
         });
@@ -34,6 +28,9 @@ $(document).ready(function() {
     }
   });
   
-  // $("#background-image").backgroundImage();
+  $('.toggle-track').click(function () {
+    jwplayer($(this).attr('data-track')).play();
+    return false;
+  })
   
 });

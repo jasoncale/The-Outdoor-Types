@@ -1,45 +1,50 @@
-#primary.grid_8
-  #band-image.section
+.sixcol
+  %h1 Welcome aboard
+  %p We make beautiful music which will crack your tears and splash your heart with light handed compliments.
+  
+  .frame
     %img{:src => @image.source }
- 
-  #recent-news.section
-    %h2 Recent news
-    %ol
-      -@news.each do |news|
-        %li
-          %h3
-            %a{:href => "#{@blog_url}/post/#{news.post_id}/#{news.slug}"}=news.title
+
+
+.sixcol.last
+  %h2 Recent news
+  %ol
+    -@news.each do |news|
+      %li
+        %h3
+          %a{:href => "#{@blog_url}/post/#{news.post_id}/#{news.slug}"}=news.title
 
     %p
       %a{:href => @blog_url}Read more articles
-          
-.grid_4
-  #upcoming-shows.section
-    %h2 Upcoming shows
-    -if @shows.empty?
-      %p We're not touring at the moment. 
-      %p 
-        Interested in booking us?
-        =succeed(".") do
-          %a{:href => "mailto:bookings@theoutdoortypes.co.uk"}Get in touch
-    -else
-      %ol#shows
-        -show_gigs = 2
-        -@shows[0...show_gigs].each do |gig|
-          %li
-            -date=Time.parse(gig['startDate'])
-            %h4
-              %a{:href => gig['url'], :title => "View event on Last.fm"}=date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} &mdash; %I:%M%p")
-            %h3=[gig['venue']['name'], gig['venue']['location']['city']].reject { |s| s.empty? }.join('<br />')
-          
-      %p
-        -if @shows.length > show_gigs
-          plus &mdash;
-          %a{:href => "shows"}==#{@shows.length - show_gigs} more appearances&hellip;
-        -else
-          %a{:href => "shows"}See all shows
+   
+.twocol
+  %h2 Upcoming shows
+  -if @shows.empty?
+    %p We're not touring at the moment. 
+    %p 
+      Interested in booking us?
+      =succeed(".") do
+        %a{:href => "mailto:bookings@theoutdoortypes.co.uk"}Get in touch
+  -else
+    %ol#shows
+      -show_gigs = 2
+      -@shows[0...show_gigs].each do |show|
+        %li
+          -date=Time.parse(show['startDate'])
+          %h3
+            %a{:href => show['url'], :title => "View event on Last.fm"}=[show['venue']['name'], show['venue']['location']['city']].reject { |s| s.empty? }.join(', ')
+          %p
+            =date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} at %I:%M%p")
+    %p
+      -if @shows.length > show_gigs
+        and 
+        %a{:href => "shows"}==#{@shows.length - show_gigs} more 
+        in the diary&hellip;
+      -else
+        %a{:href => "shows"}See all shows
 
-  #review.section
-    .clearfix
-      %blockquote=@review.quote
+.twocol.last
+  %h2 Press
+  .review
+    %blockquote=@review.quote
     %p.source=@review.source

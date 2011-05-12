@@ -12,27 +12,33 @@
       <!-- <![endif]-->
   %body  
     #background-image{"data-img-src" => "/images/bg.jpg"}
-    #page.container.clearfix
-      #header.grid_16
-        %h1#logo
-          %a{:href => "/"}The Outdoor Types
-          
-        %p.note.grid_4 set your burning sails upon this land
-        %ul#navigation.clearfix
-          %li.grid_1
+    #header.container
+      .row
+        %h1#logo.twelvecol
+          %a{:href => "/"}
+            %img.n{:alt => "The Outdoor Types", :src => "/images/logo.png"}
+            %img.h{:alt => "", :src => "/images/logo-hover.png"}       
+             
+    #navigation.container
+      .row
+        %ul.clearfix
+          %li
             %a{:href => "http://theoutdoortypes.tumblr.com"}News
-          %li.grid_1
+          %li
             %a{:href => "/about"}About
-          %li.grid_1
-            %a{:href => "/music"}Records
-          %li.grid_1
+          %li
             %a{:href => "/shows"}Shows
-            %li.grid_1
-              %a{:href => "http://twitter.com/theoutdoortypes"}Twitter
-          %li.grid_1
+          %li
+            %a{:href => "/music"}Records
+          %li
+            %a{:href => "http://theoutdoortypes.bigcartel.com"}Shop
+          %li
             %a{:href => "/contact"}Contact
-      #content.grid_16
+    #page.container
+      #content.row
         = yield
+    #footer
+      %h3 This is a footer
     
     %script{:src=> "http://code.jquery.com/jquery-1.5.min.js", :type => "text/javascript", :charset => "utf-8"}
     %script{:src=> "/js/hashgrid.js", :type => "text/javascript", :charset => "utf-8"}

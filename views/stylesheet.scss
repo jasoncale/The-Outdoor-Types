@@ -1,128 +1,69 @@
-/* reset.
+@import "sass/reset";
+@import "sass/grid";
+@import "sass/common";
+
+/* ODT CSS
+
+  1. TYPE
+  2. BACKGROUND IMAGE
+  3. MASTHEAD
+  4. NAVIGATION
+  5. HOMEPAGE
+  
+  
 --------------------------------------------- */
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	border: 0;
-	outline: 0;
-	background: transparent;
-}
-	
-ol, ul {
-	list-style: none;
-}
-
-blockquote, q {
-	quotes: none;
-}
-
-:focus {
-	outline: 0;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
-/* misc.
+/* 1. TYPE
 --------------------------------------------- */
 
-hr, .hide {
-	display: none;
-}
+$sans: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
 
-a img {
-	border: none;
-}
-
-
-/*
- & Columns : 16 
- & Gutter %: 20% 
- & MinWidth: 960px
- & MaxWidth: 1080px
- */
-.grid_1 { width: 5%; }
-.grid_2 { width: 11.25%; }
-.grid_3 { width: 17.5%; }
-.grid_4 { width: 23.75%; }
-.grid_5 { width: 30%; }
-.grid_6 { width: 36.25%; }
-.grid_7 { width: 42.5%; }
-.grid_8 { width: 48.75%; }
-.grid_9 { width: 55%; }
-.grid_10 { width: 61.25%; }
-.grid_11 { width: 67.5%; }
-.grid_12 { width: 73.75%; }
-.grid_13 { width: 80%; }
-.grid_14 { width: 86.25%; }
-.grid_15 { width: 92.5%; }
-.grid_16 { width: 98.75%; }
-
-.grid_1,
-.grid_2,
-.grid_3,
-.grid_4,
-.grid_5,
-.grid_6,
-.grid_7,
-.grid_8,
-.grid_9,
-.grid_10,
-.grid_11,
-.grid_12,
-.grid_13,
-.grid_14,
-.grid_15,
-.grid_16 {
-	margin-left: 0.625%;
-	margin-right: 0.625%;
-	float: left;
-	display: block;
-}
-
-.alpha{margin-left:0px;}
-.omega{margin-right:0px;}
-
-.container{
-	min-width: 960px; 
-	max-width: 1080px; 
-	margin: auto;
-}
-
-/* @
- * tinyfluidgrid.com
- & girlfriendnyc.com
- */
-
-.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}.clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}* html .clearfix,*:first-child+html .clearfix{zoom:1}
-
-/* SITE SPECIFIC CSS */
+$serifs: Constantia, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
 
 body {
-  background: #000;
-  font-size: 62.5%;
-  font-family: "myriad-pro-1","myriad-pro-2", "myriad pro", sans-serif;
+  font-family: $sans;
+}
+
+h1 { 
+  font-size: 24px; 
+  line-height: 40px;
+  margin-bottom: 20px; 
+}
+
+h2 { 
+  font-size: 20px; 
+  line-height: 20px; 
+  margin-bottom: 20px;
+}
+
+h3 { 
+  font-size: 14px; 
+  line-height: 20px;  
+}
+
+p, li, blockquote {
+  font-size: 14px;
+  line-height: 20px; 
+  margin-bottom: 20px;
+}
+
+ul, 
+ol { 
+  margin-bottom: 20px; 
 }
 
 a {
   text-decoration: none;
-  color: #900022;
+  color: #d11d5d;
   font-weight: bold;
 }
 
 a:hover {
-  
+  color: #79542a;
 }
 
-#page {
-  
-}
+/* 2. BACKGROUND IMAGE
+--------------------------------------------- */
 
 #background-image {
   width: 200%;
@@ -135,192 +76,274 @@ a:hover {
   background: url(/images/bg.jpg);
   background-position: 50% 0;
   max-width: 2500px;
+  display: none;
 }
 
+body {
+  background: #222 url(/images/texture.png);
+}
+
+/* 3. MASTHEAD
+--------------------------------------------- */
+
 #header {
-  border-top: 12px solid #000;
-  margin-bottom: 12px;
-  border-bottom: 4px solid #000;
-  border-color: rgba(0,0,0,0.7);
-  
+  background: #E8E8E8 url(/images/nav.png) -20% 0 repeat-x;
+	
   h1#logo {
-    padding: 0 12px;
+    padding: 24px 0 6px 0;
     font-size: 58px;
     text-transform: uppercase;
     color: white;
     font-family: "arial black", arial;
     margin: 0;
     letter-spacing: 5px;
+
     a {
+      display: block;
       color: #fff;
+      max-width: 784px;
+      height: 54px;
+      position: relative;
+      overflow: hidden;
+      img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+      img.h {
+        display: none;
+      }
     }
     
     a:hover, a:focus {
-      color: #900022;
+      color: #d11d5d;
+      img.h {
+        display: block;
+      }
+      img.n {
+        display: none;
+      }
+    }
+  
+    @media handheld, only screen and (max-width: 767px) {
+      padding-left: 2%;
+      padding-right: 2%;
     }
   }
   
   p.note {    
     padding-top: 12px;
     padding-bottom: 12px;
-    color: white;
+    color: #333;
     font-style: italic;
     font-size: 1.4em;
     line-height: 0.8em;
     padding-left: 12px;
   }
-  
-  #navigation {
-    background: rgba(0,0,0,0.1);
-    padding: 0;
-    margin: 0;
+}
+
+/* 4. NAVIGATION
+--------------------------------------------- */
+
+#navigation {
+  background: #d8c0bc url(/images/nav.png) -20% -140px repeat-x;
+  padding-top: 12px;
+  border-bottom: 1px solid #ddd;
     
+  ul {
+    margin: 0;
+    max-width: 600px;
     li {
-      padding: 0 12px 0 0;
+      width: 16.6%;
+      margin-bottom: 0;
       float: left;
-      -moz-transition: background-color 0.3s linear;  /* FF3.7+ */
-      -o-transition: background-color 0.3s linear;  /* Opera 10.5 */
-      -webkit-transition: background-color 0.3s linear;  /* Saf3.2+, Chrome */
-      
       a {
         font-family: "droid-sans-1","droid-sans-2",sans-serif;
-        color: #fff;
         text-transform: uppercase;
-        font-size: 1.1em;
+        font-size: 14px;
         font-weight: bold;
         display: block;
-        padding: 12px 6px;
+        padding: 12px 2% 6px 2%;
+        text-align: center;
+        border-bottom: 3px solid transparent;
+        text-shadow: 0 1px 1px #eee;
+      }
+      a:hover {
+        border-bottom: 3px solid #d11d5d;
+        text-shadow: 0 1px 1px #fff;
+        
       }
       
-      a:hover, a:focus {
-        color: #900022;
+      a:active {
+        padding: 13px 12px 5px 12px;
       }
-    }
-    
-    li:hover {
-      background: #fff;
-         
-      a {
-        color: #900022;
-      }
-    }
+    } 
+    li:last-child {
+      border-right: none;
+    }   
   }
 }
 
-#primary {
-  margin-left: 0;
+#page {
+  border-top: 1px solid #fff;
+  padding-top: 24px;
+  background: #f9f9f9 url(/images/texture.png);
+  
 }
 
-.section {
-  margin-bottom: 12px;
-  background: #fff;
-  background-color: rgba(255,255,255,0.8);
-  padding-bottom: 1px;
+/* 5. HOMEPAGE
+--------------------------------------------- */
 
-  h2 {
-    color: #fff;
+#page {
+  h1 {
     text-transform: uppercase;
-    background: #000;
-    font-size: 1.2em;
-    font-family: "droid-sans-1","droid-sans-2",sans-serif;
-    padding: 6px 12px;
+    font-size: 30px;    
+    color: #333;
+    line-height: 40px;
+    font-family: "ballers-delight-1","ballers-delight-2", "Arial Black";
   }
   
-  h3 {
-    font-size: 1.8em;
+  h2 {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #444;
+    line-height: 40px;    
   }
   
-  h4 {
-    font-size: 1.2em;
-  }
-  
-  ol {
-    padding: 12px 12px 0 12px;
-    
-    li {
-      margin-bottom: 12px;
-    }
+  h1, h2, h3, h4, p {
+    text-shadow: 0 1px 1px white;
   }
   
   p, blockquote {
-    padding: 0 12px;
-    font-size: 1.2em;
-    margin-bottom: 12px;
-  }
-
-}
-
-.copy-block {
-  p {
-    margin-top: 0.8em;
-    font-size: 1.4em;
-  }
-}
-
-#band-image {
-  height: 300px;
-  overflow: hidden;
-  border: 12px solid #000;
-  
-  img {
-    width: 100%;
-  }
-}
-
-#review {
-  position: relative;
-  padding-top: 24px;
-  
-  blockquote {
-    color: #fff;
-    font-size: 2.2em;
-    font-style: italic;
-    font-weight: bold;
-    float: left;
-    color: #333;
+    color: #555;
   }
   
-  blockquote:before {
-    font-family: georgia;
-    content: "“ ";
-    font-size: 4em;
-    font-weight: bold;
-    float: left;
-    line-height: 1px;
-    margin-top: 27px;
-    margin-right: 12px;
-    color: #fff;
-  }
-
-  blockquote:after {
-    font-family: georgia;
-    content: " ”";
-    font-size: 4em;
-    font-weight: bold;
-    float: right;
-    line-height: 1px;
-    margin-top: 38px;
-    margin-right: 24px;
-    color: #fff;
-  }
-  
-  p.source {
-    text-align: right;
-  }
+  .intro h2 { margin-bottom: 0; }
 }
 
-ol#shows {
-  h4 {
-    text-transform: uppercase;
-  }
-}
-
-ul#albums {
-  li {
-    float: left;
-    img {
-      width: 250px;
-      height: 250px;
+.wf-active {
+  #page {
+    h1 {
+      font-weight: regular;
     }
+  }
+}
+
+.frame {
+  margin-bottom: 24px;
+  img {
+    margin-left: 2px;
+    display: block;
+    width: 100%;
+    -moz-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* FF3.5+ */
+    -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* Saf3.0+, Chrome */
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* Opera 10.5, IE 9.0 */
+    filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee'); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee')"; /* IE8 */
+  }
+}
+
+#track-listing {
+  background: #f5f5f5;
+  padding-left: 0;
+  padding-right: 0;
+  -moz-box-shadow: 0 1px 2px rgba(10, 10, 10, 0.2); /* FF3.5+ */
+  -webkit-box-shadow: 0 1px 2px rgba(10, 10, 10, 0.2); /* Saf3.0+, Chrome */
+  box-shadow: 0 2px 2px rgba(150, 150, 150, 0.4); /* Opera 10.5, IE 9.0 */
+  filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee'); /* IE6,IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee')"; /* IE8 */
+  
+  li {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    p {
+      color: #666;
+      padding: 0 0 0 12px;
+      margin: 0;
+      line-height: 24px;
+      font-size: 12px;
+      float: left;
+      font-family: $sans;
+    }
+    
+    a.track {
+      padding-right: 12px;
+    }
+    
+    span { 
+      color: #666;
+      width: 250px;
+      text-align: center;
+      padding-right: 0;
+    }
+    
+    a.track, span {
+      float: right;
+      font-size: 13px;
+      display: block;
+      line-height: 24px;
+    }
+      
+    div {
+      float: right;
+      margin-right: 12px;
+    }
+    
+  }
+  
+  li:hover {
+    background: rgba(255,255,255,0.5);
+    
+    p {
+      color: #333;
+    }
+  }
+  
+  @media handheld, only screen and (max-width: 767px) {
+    margin-left: 20px;
+    margin-right: 20px;
+    
+    li {
+      a.track, span, div, p { 
+        float: none;
+      }
+      
+      a.track, span, div {
+        text-align: left;
+        margin-right: 0;
+        margin-left: 12px;
+      }
+      
+      div {
+        margin-bottom: 6px;
+      }
+    }
+  }  
+}
+
+#albums {
+  @media handheld, only screen and (max-width: 767px) {
+    li {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+#footer {
+  height: 300px;
+  
+  h3 {
+    color: #ddd;
+    font-size: 40px;
+    font-family: "Arial Black";
+    text-align: center;
+    padding: 20px 0;
+    text-shadow: 0 1px 1px #bbb;
+    text-transform: uppercase;
   }
 }

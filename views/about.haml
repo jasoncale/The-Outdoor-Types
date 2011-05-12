@@ -1,7 +1,13 @@
-#primary.grid_8
-  #band-image.section
+.sixcol
+  %h2=@title
+  .frame
     %img{:src => @image.source }
+  =@about.body
 
-  .copy-block.section
-    %h2=@title
-    =@body.body
+.sixcol.last
+  %h3 What the critics say &hellip;
+  -@reviews.each do |review|
+    .review
+      .clearfix
+        %blockquote=review.quote
+      %p.source=review.source
