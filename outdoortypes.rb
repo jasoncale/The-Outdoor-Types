@@ -10,6 +10,7 @@ require 'yaml'
 module Outdoortypes
   class Site < Sinatra::Base
     set :haml, :format => :html5
+    set :root, File.dirname(__FILE__)
             
     get '/' do
       @shows = Outdoortypes::Event.get
