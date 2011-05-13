@@ -1,6 +1,6 @@
 .row
   .intro.twelvecol
-    %h2=@album.title
+    %h1=@album.title
     %p
       Released:
       =Time.at(@album.release_date).strftime("%b %Y")
@@ -23,7 +23,7 @@
 .row
   .twelvecol
     %h3 Also in the catalogue &hellip;
-    %ul#albums
+    %ul#albums.links
       -@discography.each_with_index do |album, index|
         %li.twocol{:class => ((index + 1) % 3 == 0) ? "last" : ""}
           .frame

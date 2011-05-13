@@ -1,9 +1,9 @@
-.intro.twelvecol
-  %h2 Our records
-  %p Click on an album to listen
+.twelvecol
+  %h1 Our records
+  %p.note Click on an album to listen
 %ul#albums
   -@discography.each_with_index do |album, index|
-    %li.fourcol{:class => ((index + 1) % 3 == 0) ? "last" : ""}
+    %li.threecol{:class => ((index + 1) % 4 == 0) ? "last" : ""}
       .frame
         %a{:href => "/music/#{album['title'].downcase.gsub(/\s/, '-')}"}
           %img{:src => album['large_art_url']}

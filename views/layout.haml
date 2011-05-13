@@ -38,7 +38,27 @@
       #content.row
         = yield
     #footer
-      %h3 This is a footer
+      .row
+        .eightcol
+          %h3 ODT Elsewhere
+          %ul.links
+            %li
+              %a{:href => "http://twitter.com/theoutdoortypes", :title => "Follow ODT on twitter"}twitter
+            %li
+              %a{:href => "http://twitter.com/theoutdoortypes", :title => "The Outdoor Types on Facebook"}facebook
+            %li
+              %a{:href => "http://twitter.com/theoutdoortypes", :title => "The Outdoor Types on Last FM"}last.fm
+            %li
+              %a{:href => "http://twitter.com/theoutdoortypes", :title => "Listen to The Outdoor Types on Bandcamp"}bandcamp
+            %li
+              %a{:href => "http://twitter.com/theoutdoortypes", :title => "The Outdoor Types on Myspace"}myspace
+        
+        .fourcol.last
+          %p.copyright 
+            Copyright. The Outdoor Types.
+            2007 &mdash;
+            =Date.today.year
+        
     
     %script{:src=> "http://code.jquery.com/jquery-1.5.min.js", :type => "text/javascript", :charset => "utf-8"}
     %script{:src=> "/js/hashgrid.js", :type => "text/javascript", :charset => "utf-8"}

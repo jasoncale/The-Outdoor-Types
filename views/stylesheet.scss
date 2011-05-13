@@ -16,9 +16,9 @@
 /* 1. TYPE
 --------------------------------------------- */
 
-$sans: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+$sans: "droid-sans-1","droid-sans-2", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
 
-$serifs: Constantia, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+$serifs: "rooney-web-1","rooney-web-2", Constantia, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
 
 body {
   font-family: $sans;
@@ -41,10 +41,17 @@ h3 {
   line-height: 20px;  
 }
 
-p, li, blockquote {
-  font-size: 14px;
+p, li {
+  font-size: 13px;
   line-height: 20px; 
   margin-bottom: 20px;
+}
+
+blockquote {
+  font-size: 13px;
+  line-height: 20px;
+  font-family: "rooney-web-1","rooney-web-2";
+  font-style: italic;
 }
 
 ul, 
@@ -59,7 +66,7 @@ a {
 }
 
 a:hover {
-  color: #79542a;
+  color: #ecad60;
 }
 
 /* 2. BACKGROUND IMAGE
@@ -80,7 +87,7 @@ a:hover {
 }
 
 body {
-  background: #222 url(/images/texture.png);
+  background: #111 url(/images/texture.png);
 }
 
 /* 3. MASTHEAD
@@ -166,11 +173,11 @@ body {
         padding: 12px 2% 6px 2%;
         text-align: center;
         border-bottom: 3px solid transparent;
-        text-shadow: 0 1px 1px #eee;
+        text-shadow: 0 1px 1px #333;
       }
       a:hover {
         border-bottom: 3px solid #d11d5d;
-        text-shadow: 0 1px 1px #fff;
+        text-shadow: 0 1px 1px #222;
         
       }
       
@@ -187,8 +194,12 @@ body {
 #page {
   border-top: 1px solid #fff;
   padding-top: 24px;
-  background: #f9f9f9 url(/images/texture.png);
-  
+  background: #e8e8e8 url(/images/page-texture.png);
+  padding-bottom: 80px;
+    
+  a:hover {
+    color: #a17641;
+  };
 }
 
 /* 5. HOMEPAGE
@@ -197,28 +208,74 @@ body {
 #page {
   h1 {
     text-transform: uppercase;
-    font-size: 30px;    
     color: #333;
-    line-height: 40px;
     font-family: "ballers-delight-1","ballers-delight-2", "Arial Black";
+    font-size: 400%;
+    line-height: 80px;
+    margin-bottom: 0;
   }
   
   h2 {
+    font-family: "rooney-web-1","rooney-web-2";
     text-transform: uppercase;
     font-size: 20px;
-    color: #444;
-    line-height: 40px;    
+    color: #546;
+    line-height: 20px;
+    text-shadow: 0 1px 1px white;
+    margin-bottom: 10px;
   }
   
   h1, h2, h3, h4, p {
     text-shadow: 0 1px 1px white;
   }
   
-  p, blockquote {
-    color: #555;
+  p, blockquote, h4 {
+    color: #657;
+  }
+  
+  li {
+    
+    h3 {
+      font-size: 16px;
+      line-height: 20px;
+    }
+    
+    p {
+      font-size: 12px;
+      line-height: 20px;
+    }
   }
   
   .intro h2 { margin-bottom: 0; }
+  
+  p.note {
+    font-style: italic;
+    margin-bottom: 5px;
+    color: #aaa;
+  }
+
+  #introducing {
+    p {
+      font-size: 15px;
+      font-family: "rooney-web-1","rooney-web-2";
+      
+      strong {
+        font-style: normal;
+      }
+    }
+    
+    p#tag {
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+  
+}
+
+.review {
+  .source {
+    text-align: right;
+  }
 }
 
 .wf-active {
@@ -230,16 +287,19 @@ body {
 }
 
 .frame {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #fff;
+  -moz-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* FF3.5+ */
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* Saf3.0+, Chrome */
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* Opera 10.5, IE 9.0 */
+  filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee'); /* IE6,IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee')"; /* IE8 */
+  margin-left: 2px;
+    
   img {
-    margin-left: 2px;
     display: block;
     width: 100%;
-    -moz-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* FF3.5+ */
-    -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* Saf3.0+, Chrome */
-    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2); /* Opera 10.5, IE 9.0 */
-    filter:  progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee'); /* IE6,IE7 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=0px, OffY=0px, Color='#eeeeee')"; /* IE8 */
   }
 }
 
@@ -326,6 +386,15 @@ body {
 }
 
 #albums {
+  
+  li h3 {
+    text-transform: uppercase;
+  }
+  
+  .frame {
+    margin-bottom: 10px;
+  }
+  
   @media handheld, only screen and (max-width: 767px) {
     li {
       padding-left: 0;
@@ -334,16 +403,35 @@ body {
   }
 }
 
-#footer {
-  height: 300px;
+#albums.links {
+  margin-top: 10px;
+  .frame {
+    margin-bottom: 5px;
+  }
+}
+
+#footer { 
+  padding: 40px 0;
   
   h3 {
-    color: #ddd;
-    font-size: 40px;
-    font-family: "Arial Black";
-    text-align: center;
-    padding: 20px 0;
+    font-family: $serifs;
     text-shadow: 0 1px 1px #bbb;
-    text-transform: uppercase;
+    font-size: 20px;
+    color: #ccc;
+  }
+  
+  ul.links {
+    padding-top: 10px;
+    li {
+      float: left;
+      margin-right: 2%;
+      a {
+        display: block;
+      }
+    }
+  }
+  
+  p.copyright {
+    color: #ddd;
   }
 }

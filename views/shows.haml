@@ -1,6 +1,7 @@
-.sixcol
+.twelvecol
   %h1 Upcoming shows
   
+.sixcol  
   .frame
     %img{:src => @image.source }
   
@@ -12,11 +13,13 @@
       %a{:href => "/contact", :title => "Contact the band"}get in touch 
       and get us to come play near you.
 -else 
-  %ol#shows.sixcol.last
-    -@shows.each do |show|
-      %li
-        -date=Time.parse(show['startDate'])
-        %h3
-          %a{:href => show['url'], :title => "View event on Last.fm"}=[show['venue']['name'], show['venue']['location']['city']].reject { |s| s.empty? }.join(', ')
-        %p
-          =date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} at %I:%M%p")
+  .sixcol.last
+    %h2 Tour dates
+    %ol#shows
+      -@shows.each do |show|
+        %li
+          -date=Time.parse(show['startDate'])
+          %h3
+            %a{:href => show['url'], :title => "View event on Last.fm"}=[show['venue']['name'], show['venue']['location']['city']].reject { |s| s.empty? }.join(', ')
+          %p
+            =date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} at %I:%M%p")

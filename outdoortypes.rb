@@ -36,13 +36,6 @@ module Outdoortypes
       haml :shows
     end
     
-    get '/press' do
-      content = tumblr_content(config[:tumblr][:reviews])
-      @title = content['tumblr']['tumblelog']['title']
-      @reviews = Tumblr::Reader.get_posts(content, :quote)
-      haml :press
-    end
-    
     get '/music' do
       @discography = band.discography.sort_by {|album| album['release_date'] }.reverse      
       haml :music
@@ -56,6 +49,15 @@ module Outdoortypes
       else
         not_found
       end
+    end
+    
+    get '/contact' do
+      content = tumblr_content(config[:tumblr][:contact])
+      @title = content['tumblr']['tumblelog']['title']
+      @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
+      @info = Tumblr::Reader.get_posts(content, :regular).first
+      
+      haml :contact
     end
 
     get '/style.css' do
@@ -86,8 +88,31 @@ module Outdoortypes
     class << self
       def config
         @config ||= (
-          config_path = File.read(File.dirname(__FILE__) + "/config.yml")
-          YAML.load(config_path)["config"]
+          if File.exists?(File.dirname(__FILE__) + "/config.yml")
+            config_path = File.read(File.dirname(__FILE__) + "/config.yml")
+            YAML.load(config_path)["config"]
+          else
+            {
+              :lastfm => {
+                :artist => ENV['LASTFM_ARTIST'],
+                :api_key => ENV['LASTFM_KEY'],
+                :api_secret => ENV['LASTFM_SECRET']
+              },
+              :tumblr => {
+                :email => ENV['TUMBLR_EMAIL'],
+                :password => ENV['TUMBLR_PASS'],
+                :reviews => "odtreviews",
+                :about => "odtabout",
+                :news => "theoutdoortypes1",
+                :shows => "odtshows",
+                :contact => "odtcontact"
+              },
+              :bandcamp => {
+                :api_key => ENV['BANDCAMP_KEY'],
+                :band_id => ENV['BANDCAMP_BANDID']
+              }
+            }            
+          end
         )
       end
     end

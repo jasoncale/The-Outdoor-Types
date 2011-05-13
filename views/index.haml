@@ -1,9 +1,19 @@
-.sixcol
-  %h1 Welcome aboard
-  %p We make beautiful music which will crack your tears and splash your heart with light handed compliments.
+%h1.twelvecol Welcome aboard
+
+#introducing.sixcol
+  %p#tag 
+    %strong THE OUTDOOR TYPES 
+    make music that will hug you on a warm spring day and scare you in a dark alley.
   
   .frame
     %img{:src => @image.source }
+  %p
+    It is recommended that you listen to our
+    =succeed(",") do
+      %a{:href => "/music", :title => "Listen to our records"}records 
+    then come see an upcoming
+    %a{:href => "/shows", :title => "See our upcoming shows"}musical show 
+    &hellip; Your friends, ODT.
 
 
 .sixcol.last
@@ -47,4 +57,6 @@
   %h2 Press
   .review
     %blockquote=@review.quote
-    %p.source=@review.source
+    %p.source
+      &mdash;
+      =@review.source
