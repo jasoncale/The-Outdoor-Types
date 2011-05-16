@@ -39,8 +39,8 @@
         = yield
     #footer
       .row
-        .eightcol
-          %h3 ODT Elsewhere
+        #elsewhere.sixcol
+          %h3 Elsewhere
           %ul.links
             %li
               %a{:href => "http://twitter.com/theoutdoortypes", :title => "Follow ODT on twitter"}twitter
@@ -53,12 +53,21 @@
             %li
               %a{:href => "http://twitter.com/theoutdoortypes", :title => "The Outdoor Types on Myspace"}myspace
         
-        .fourcol.last
-          %p.copyright 
-            Copyright. The Outdoor Types.
+        #footnotes.fourcol.last
+          %p#rcdlbl.footnote
+            %a#ibtp{:href => "http://www.iblametheparentsrecords.com", :title => "I Blame the Parents Records"}I Blame the Parents
+
+          %p#gfr.footnote
+            Built by
+            =succeed('.') do
+              %a{:href => "http://gofreerange.com", :title => "Software revolutionaries"}Go Free Range
+                            
+          %p.footnote
+            &copy; The Outdoor Types.
             2007 &mdash;
-            =Date.today.year
-        
+            =succeed('.') do
+              =Date.today.year
+
     
     %script{:src=> "http://code.jquery.com/jquery-1.5.min.js", :type => "text/javascript", :charset => "utf-8"}
     %script{:src=> "/js/hashgrid.js", :type => "text/javascript", :charset => "utf-8"}

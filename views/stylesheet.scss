@@ -411,27 +411,77 @@ body {
 }
 
 #footer { 
-  padding: 40px 0;
+  padding-bottom: 40px;
+  
+  #elsewhere {
+    margin-top: 20px;
+    position: relative;
+    min-height: 105px;
+    background: url(/images/odt-globe-sm.png) no-repeat 20px 0;    
+  }
   
   h3 {
     font-family: $serifs;
     text-shadow: 0 1px 1px #bbb;
     font-size: 20px;
     color: #ccc;
+    margin-left: 150px;
+    margin-top: 10px;
+    line-height: 40px;
   }
   
   ul.links {
-    padding-top: 10px;
+    margin-left: 150px;
     li {
       float: left;
       margin-right: 2%;
+      margin-bottom: 0;
       a {
         display: block;
       }
     }
   }
+    
+  p.footnote {
+    color: #777;
+    font-size: 10px;
+    float: left;
+    margin: 0;
+  }
   
-  p.copyright {
-    color: #ddd;
+  #footnotes {
+    padding-top: 20px;
+  }
+  
+  p#gfr {
+    margin-top: 20px;
+  }
+  
+  p#rcdlbl {
+    margin-right: 4%;
+    
+    a#ibtp{
+      display: block;
+      width: 80px;
+      height: 73px;
+      border: 1px solid #111;
+      background: url(/images/ibtp.jpg) 0 -73px;
+      text-indent: -9999px;
+    }
+
+    a#ibtp:hover{
+      background-position: 0 0;
+    }
+  }
+  
+  @media handheld, only screen and (max-width: 767px) {
+    #elsewhere h3, #elsewhere ul.links {
+      margin-left: 130px;
+    }
+    
+    p#gfr {
+      margin-top: 0;
+      margin-right: 4%;
+    }    
   }
 }
