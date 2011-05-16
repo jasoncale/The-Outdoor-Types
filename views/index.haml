@@ -23,9 +23,7 @@
       %li
         %h3
           %a{:href => "#{@blog_url}/post/#{news.post_id}/#{news.slug}"}=news.title
-
-    %p
-      %a{:href => @blog_url}Read more articles
+        =news.body
    
 .twocol
   %h2 Upcoming shows
@@ -47,7 +45,6 @@
             =date.strftime("%a, %d %b#{", %Y" if date.year != Date.today.year} at %I:%M%p")
     %p
       -if @shows.length > show_gigs
-        and 
         %a{:href => "shows"}==#{@shows.length - show_gigs} more 
         in the diary&hellip;
       -else
