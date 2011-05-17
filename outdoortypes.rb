@@ -71,6 +71,17 @@ module Outdoortypes
       scss :stylesheet
     end
     
+    # HELPERS
+    
+    helpers do
+      def link_to_unless_current(label, link, title = nil)
+        title = "Go to #{label} page" if title.nil?
+        klassy = " class='current'" if request.path_info == link
+        link_html = "<a href='#{link}' title='#{title}'#{klassy}>#{label}</a>"
+        link_html
+      end
+    end
+    
     def tumblr_content(name, opts = {})
       Outdoortypes::TumblrBlog.get(name, opts)
     end

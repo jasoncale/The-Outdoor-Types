@@ -25,15 +25,15 @@
           %li
             %a{:href => "http://theoutdoortypes.tumblr.com"}News
           %li
-            %a{:href => "/about"}About
+            =link_to_unless_current("About", '/about', "Read biography and press")
           %li
-            %a{:href => "/shows"}Shows
+            =link_to_unless_current("Shows", '/shows', "Upcoming gig listing")
           %li
-            %a{:href => "/music"}Records
+            =link_to_unless_current("Records", '/music', "Listen to ODT records")
           %li
-            %a{:href => "http://theoutdoortypes.bigcartel.com"}Shop
+            %a{:href => "http://theoutdoortypes.bigcartel.com", :title => "Buy our records etc"}Shop
           %li
-            %a{:href => "/contact"}Contact
+            =link_to_unless_current("Contact", '/contact', "Get in touch")
     #page.container
       #content.row
         = yield

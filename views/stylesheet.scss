@@ -178,11 +178,14 @@ body {
       a:hover {
         border-bottom: 3px solid #d11d5d;
         text-shadow: 0 1px 1px #222;
-        
       }
-      
       a:active {
         padding: 13px 12px 5px 12px;
+      }
+      
+      a.current {
+        border-bottom: 3px solid #ecad60;
+        text-shadow: 0 1px 1px #222;
       }
     } 
     li:last-child {
