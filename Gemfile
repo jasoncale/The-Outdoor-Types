@@ -3,7 +3,7 @@ source "http://rubygems.org"
 
 gem "sinatra"
 gem "sinatra-reloader"
-gem "sinatra-cache"
+gem "activesupport"
 gem "haml"
 gem "sass"
 gem "i18n"

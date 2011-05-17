@@ -7,17 +7,15 @@ require 'lastfm'
 require 'tumblr'
 require 'bandcamp'
 require 'yaml'
+require 'active_support/time'
 
 module Outdoortypes
   class Site < Sinatra::Base
     set :haml, :format => :html5
     set :root, File.dirname(__FILE__)
-    
-    # turn on caching
-    register(Sinatra::Cache)
-    set :cache_enabled, true          
-    
+
     get '/' do
+      cache_for(20.minutes)
       @shows = Outdoortypes::Event.get
       @review = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote).sort_by { rand }.first
       @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:about]), :photo).sort_by { rand }.first
@@ -27,6 +25,7 @@ module Outdoortypes
     end
     
     get '/about' do
+      cache_for(20.minutes)
       content = tumblr_content(config[:tumblr][:about])
       @title = content['tumblr']['tumblelog']['title']
       @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
@@ -36,17 +35,20 @@ module Outdoortypes
     end
     
     get '/shows' do
+      cache_for(20.minutes)
       @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:shows]), :photo).sort_by { rand }.first
       @shows = Outdoortypes::Event.get
       haml :shows
     end
     
     get '/music' do
+      cache_for(1.hour)
       @discography = band.discography.sort_by {|album| album['release_date'] }.reverse      
       haml :music
     end
     
     get '/music/:name' do
+      cache_for(1.hour)
       @discography = band.discography.reject { |album| album['title'].downcase.gsub(/\s/, '-') == params[:name] }.sort_by {|album| album['release_date'] }.reverse
       @album = load_album(params[:name])
       if @album
@@ -57,6 +59,7 @@ module Outdoortypes
     end
     
     get '/contact' do
+      cache_for(1.day)
       content = tumblr_content(config[:tumblr][:contact])
       @title = content['tumblr']['tumblelog']['title']
       @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
@@ -65,6 +68,7 @@ module Outdoortypes
     end
 
     get '/style.css' do
+      cache_for(1.hour)
       scss :stylesheet
     end
     
@@ -85,6 +89,10 @@ module Outdoortypes
     
     def config
       Outdoortypes::Base.config
+    end
+    
+    def cache_for(seconds)
+      response.headers['Cache-Control'] = "0public, max-age=#{seconds.to_s}"
     end
   end
   
