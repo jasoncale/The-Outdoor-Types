@@ -9,13 +9,6 @@ require 'yaml'
 require 'active_support/time'
 
 module Outdoortypes
-  class RemoteData
-    include DataMapper::Resource
-    property :id, Integer, :serial => true
-    property :url, String 
-    property :body, Text
-  end
-
   class Site < Sinatra::Base
     set :haml, :format => :html5
     set :root, File.dirname(__FILE__)
@@ -75,7 +68,7 @@ module Outdoortypes
     
     get '/cache-test' do
       response.headers['Cache-Control'] = 'public, max-age=300'
-      render :text => "Rendered at #{Time.now}"
+      "Rendered at #{Time.now}"
     end
 
     get '/style.css' do
@@ -114,7 +107,7 @@ module Outdoortypes
     end
     
     def cache_for(seconds)
-      headers 'Cache-Control' => "public, max-age=#{seconds.to_s}"
+      response.headers['Cache-Control'] = "public, max-age=#{seconds.to_s}"      
     end
   end
   
