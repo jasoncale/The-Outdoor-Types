@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/cache'
 require 'haml'
 require 'sass'
 require 'lastfm'
@@ -11,7 +12,11 @@ module Outdoortypes
   class Site < Sinatra::Base
     set :haml, :format => :html5
     set :root, File.dirname(__FILE__)
-            
+    
+    # turn on caching
+    register(Sinatra::Cache)
+    set :cache_enabled, true          
+    
     get '/' do
       @shows = Outdoortypes::Event.get
       @review = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote).sort_by { rand }.first
@@ -26,8 +31,7 @@ module Outdoortypes
       @title = content['tumblr']['tumblelog']['title']
       @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
       @about = Tumblr::Reader.get_posts(content, :regular).first
-      @reviews = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote)
-      
+      @reviews = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote)      
       haml :about
     end
     
@@ -57,7 +61,6 @@ module Outdoortypes
       @title = content['tumblr']['tumblelog']['title']
       @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
       @info = Tumblr::Reader.get_posts(content, :regular).first
-      
       haml :contact
     end
 
