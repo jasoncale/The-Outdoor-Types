@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{Title}{block:PostTitle} - {PostTitle}{/block:PostTitle}</title>
+    <link rel="icon" href="{Favicon}"/>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
+    <link rel="stylesheet" href="http://theoutdoortypes.heroku.com/style.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="http://theoutdoortypes.local/style.css" type="text/css" media="screen">
+    
+    {block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+    <script charset="utf-8" src="http://use.typekit.com/tji5wyt.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+        try{Typekit.load();}catch(e){}
+      //]]>
+    </script>
+  </head>
+  <body>
+    <div class="container" id="header">
+      <div class="row">
+        <h1 class="twelvecol" id="logo">
+          <a href="/">
+            <img alt="The Outdoor Types" class="n" src="http://theoutdoortypes.heroku.com/images/logo.png">
+            <img alt="" class="h" src="http://theoutdoortypes.heroku.com/images/logo-hover.png">
+          </a>
+        </h1>
+      </div>
+    </div>
+
+    <div class="container" id="navigation">
+      <div class="row">
+        <ul class="clearfix">
+          <li>
+            <a href="http://theoutdoortypes.tumblr.com" class="current">News</a>
+          </li>
+          <li>
+            <a href="http://theoutdoortypes.heroku.com/about">About</a>
+          </li>
+          <li>
+            <a href="http://theoutdoortypes.heroku.com/shows">Shows</a>
+          </li>
+          <li>
+            <a href="http://theoutdoortypes.heroku.com/music">Records</a>
+          </li>
+          <li>
+            <a href="http://theoutdoortypes.bigcartel.com">Shop</a>
+          </li>
+          <li>
+            <a href="http://theoutdoortypes.heroku.com/contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="page" class="main container">    
+      <div id="content" class="row">
+        <h1 class="twelvecol">News</h1>
+        {block:Posts}
+          <div class="post row">
+            <div class="post-content eightcol">
+            
+              {block:Regular}
+                {block:Title}<h3>{Title}</h3>{/block:Title}
+                {Body}
+              {/block:Regular}
+
+              {block:Photo}          
+                <div class="frame">
+                  {LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" title="{PhotoAlt}">{LinkCloseTag}
+                </div>
+                <p>{Caption}</p>
+              {/block:Photo}
+
+              {block:Quote}
+                <blockquote class="{Length}_quote">{Quote}</blockquote>
+                {block:Source}<p class="source">&mdash;&nbsp;{Source}</p>{/block:Source}
+              {/block:Quote}
+
+              {block:Video}
+                <div class="frame">{Video-500}</div>
+                <p>{Caption}</p>
+              {/block:Video}
+
+              {block:Audio}
+                {AudioPlayerGrey}
+                <p>{Caption}</p>
+              {/block:Audio}
+
+              {block:Link}
+                <h3><a href="{URL}" {Target}>{Name}</a>&nbsp;&rarr;</h3>
+                {block:Description}<p>{Description}</p>{/block:Description}
+              {/block:Link}
+
+              {block:Conversation}
+                {block:Title}<h3>{Title}</h3>{/block:Title}
+                <ol class="conversation">
+                  {block:Lines}
+                    <li>{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</li>
+                  {/block:Lines}
+                </ol>
+              {/block:Conversation}
+              
+            </div>
+            
+            <div class="meta fourcol last">
+              {block:Date}
+                <h4>{block:NewDayDate}{Month} {DayOfMonth}, {Year} at {/block:NewDayDate}{12Hour}:{Minutes}{AmPm}</h4>
+              {/block:Date}
+              
+              {block:Pagination}
+                <p><a href="{Permalink}">{NoteCountWithLabel}</a></p>
+              {/block:Pagination}
+              
+              {block:SearchPage}
+                <p><a href="{Permalink}">{NoteCountWithLabel}</a></p>
+              {/block:SearchPage}
+              
+              {block:PermalinkPage}
+                <p><a href="/">Back to all posts</a></p>
+              {/block:PermalinkPage}
+              
+              {block:RebloggedFrom}
+                <p>{lang:Reblogged from ReblogRootName 2}</p>
+              {/block:RebloggedFrom}
+            </div>
+              
+          </div>
+        {/block:Posts}
+        
+        {block:Pagination}
+        <ul id="pagination" class="twelvecol">
+          {block:NextPage}
+          <li class="next">
+            &larr;&nbsp;<a href="{NextPage}">{lang:Next}</a>
+          </li>
+          {/block:NextPage}
+          
+          <li class="current_page">
+            <p>{CurrentPage} of {TotalPages}</p>
+          </li>
+          
+          {block:PreviousPage}
+          <li class="prev">
+            <a href="{PreviousPage}">{lang:Previous}</a>&nbsp;&rarr;
+          </li>
+          {/block:PreviousPage}
+
+        </ul>
+        {/block:Pagination}
+        
+        {block:PermalinkPagination}
+        <ul id="pagination" class="twelvecol">
+          {block:NextPost}
+          <li class="next">
+            &larr;&nbsp;<a href="{NextPost}">{lang:Next post}</a>
+          </li>
+          {/block:NextPost}
+
+          {block:PreviousPost}
+            <li class="prev">
+              <a href="{PreviousPost}">{lang:Previous post}</a>&nbsp;&rarr;
+            </li>
+          {/block:PreviousPost}
+        </ul>
+        {/block:PermalinkPagination}
+        
+      </div>
+        
+    </div>
+      
+    <div id="footer">
+      <div class="row">
+        <div class="sixcol" id="elsewhere">
+          <h3>Elsewhere</h3>
+          <ul class="links">
+            <li>
+              <a href="http://twitter.com/theoutdoortypes" title="Follow ODT on twitter">twitter</a>
+            </li>
+            <li>
+              <a href="http://twitter.com/theoutdoortypes" title="The Outdoor Types on Facebook">facebook</a>
+            </li>
+            <li>
+              <a href="http://twitter.com/theoutdoortypes" title="The Outdoor Types on Last FM">last.fm</a>
+            </li>
+            <li>
+              <a href="http://twitter.com/theoutdoortypes" title="Listen to The Outdoor Types on Bandcamp">bandcamp</a>
+            </li>
+            <li>
+              <a href="http://twitter.com/theoutdoortypes" title="The Outdoor Types on Myspace">myspace</a>
+            </li>
+          </ul>
+        </div>
+        <div class="fourcol last" id="footnotes">
+          <p class="footnote" id="rcdlbl">
+            <a href="http://www.iblametheparentsrecords.com" id="ibtp" title="I Blame the Parents Records">I Blame the Parents</a>
+          </p>
+          <p class="footnote" id="jase">
+            Made by
+            <a href="http://jasoncale.com" title="Designer etc. Go Free Range.">Jase</a>.
+          </p>
+          <p class="footnote">
+            © The Outdoor Types.
+            2007 —
+            2011.
+          </p>
+        </div>
+      </div>
+    </div>
+         
+  </body>
+</html>

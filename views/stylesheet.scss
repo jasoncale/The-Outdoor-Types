@@ -232,7 +232,7 @@ body {
     text-shadow: 0 1px 1px white;
   }
   
-  p, blockquote, h4 {
+  p, blockquote, h4, li {
     color: #657;
   }
   
@@ -275,10 +275,8 @@ body {
   
 }
 
-.review {
-  .source {
-    text-align: right;
-  }
+.source {
+  text-align: right;
 }
 
 .wf-active {
@@ -456,8 +454,9 @@ body {
     padding-top: 20px;
   }
   
-  p#gfr {
+  p#jase {
     margin-top: 20px;
+    min-width: 100px;
   }
   
   p#rcdlbl {
@@ -482,9 +481,56 @@ body {
       margin-left: 130px;
     }
     
-    p#gfr {
+    p#jase {
       margin-top: 0;
       margin-right: 4%;
+      min-width: auto;
     }    
+  }
+}
+
+/* BLOG THEME */
+
+#content {
+  .post-content {
+    blockquote {
+      font-size: 40px;
+      line-height: 40px;
+      padding: 20px 40px;
+    }
+    
+    h3 {
+      font-size: 25px;
+      color: #657;
+      line-height: 40px;
+      font-family: $serifs;  
+    }
+  }
+
+  .meta {
+    p, h4 {
+      font-size: 11px;
+    }
+  }
+  
+  .post {
+    border-bottom: 1px solid #DDD;
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+  
+  .post:first-child {
+    border-top: none;
+  }
+}
+
+ul#pagination {
+  border-top: 1px solid #EEE;
+  padding-top: 20px;
+  li {
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 0;
   }
 }
