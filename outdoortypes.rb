@@ -18,7 +18,7 @@ module Outdoortypes
       @shows = Outdoortypes::Event.get
       @review = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote).sort_by { rand }.first
       @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:about]), :photo).sort_by { rand }.first
-      @news = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:news], :num => 2)) || []
+      @news = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:news]), :regular).first
       @blog_url = "http://#{config[:tumblr][:news]}.tumblr.com"
       haml :index
     end

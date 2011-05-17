@@ -17,13 +17,10 @@
 
 
 .sixcol.last
-  %h2 Recent news
-  %ol
-    -@news.each do |news|
-      %li
-        %h3
-          %a{:href => "#{@blog_url}/post/#{news.post_id}/#{news.slug}"}=news.title
-        =news.body
+  %h2 Recent news  
+  %h3
+    %a{:href => "#{@blog_url}/post/#{@news.post_id}/#{@news.slug}"}=@news.title
+  =@news.body
    
 .twocol
   %h2 Upcoming shows
