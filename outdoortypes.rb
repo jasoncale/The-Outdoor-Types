@@ -125,7 +125,7 @@ module Outdoortypes
                 :password => ENV['TUMBLR_PASS'],
                 :reviews => "odtreviews",
                 :about => "odtabout",
-                :news => "theoutdoortypes1",
+                :news => "theoutdoortypes",
                 :shows => "odtshows",
                 :contact => "odtcontact"
               },
