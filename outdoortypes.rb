@@ -91,7 +91,7 @@ module Outdoortypes
     end
     
     def cache_for(seconds)
-      response.headers['Cache-Control'] = "0public, max-age=#{seconds.to_s}"
+      response.headers['Cache-Control'] = "public, max-age=#{seconds.to_s}"
     end
   end
   
