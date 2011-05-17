@@ -9,6 +9,13 @@ require 'yaml'
 require 'active_support/time'
 
 module Outdoortypes
+  class RemoteData
+    include DataMapper::Resource
+    property :id, Integer, :serial => true
+    property :url, String 
+    property :body, Text
+  end
+
   class Site < Sinatra::Base
     set :haml, :format => :html5
     set :root, File.dirname(__FILE__)
@@ -41,13 +48,13 @@ module Outdoortypes
     end
     
     get '/music' do
-      cache_for(1.hour)
+      cache_for(1.day)
       @discography = band.discography.sort_by {|album| album['release_date'] }.reverse      
       haml :music
     end
     
     get '/music/:name' do
-      cache_for(1.hour)
+      cache_for(1.day)
       @discography = band.discography.reject { |album| album['title'].downcase.gsub(/\s/, '-') == params[:name] }.sort_by {|album| album['release_date'] }.reverse
       @album = load_album(params[:name])
       if @album
@@ -64,6 +71,11 @@ module Outdoortypes
       @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
       @info = Tumblr::Reader.get_posts(content, :regular).first
       haml :contact
+    end
+    
+    get '/cache-test' do
+      response.headers['Cache-Control'] = 'public, max-age=300'
+      render :text => "Rendered at #{Time.now}"
     end
 
     get '/style.css' do
@@ -102,7 +114,7 @@ module Outdoortypes
     end
     
     def cache_for(seconds)
-      response.headers['Cache-Control'] = "public, max-age=#{seconds.to_s}"
+      headers 'Cache-Control' => "public, max-age=#{seconds.to_s}"
     end
   end
   
