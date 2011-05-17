@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-require 'sinatra/cache'
 require 'haml'
 require 'sass'
 require 'lastfm'
