@@ -4,7 +4,7 @@
     <title>{Title}{block:PostTitle} - {PostTitle}{/block:PostTitle}</title>
     <link rel="icon" href="{Favicon}"/>
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
-    <link rel="stylesheet" href="http://theoutdoortypes.heroku.com/style.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="http://theoutdoortypes.co.uk/style.css" type="text/css" media="screen">
     
     {block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
     <script charset="utf-8" src="http://use.typekit.com/tji5wyt.js" type="text/javascript"></script>
@@ -19,8 +19,8 @@
       <div class="row">
         <h1 class="twelvecol" id="logo">
           <a href="http://theoutdoortypes.co.uk" title="Home">
-            <img alt="The Outdoor Types" class="n" src="http://theoutdoortypes.heroku.com/images/logo.png">
-            <img alt="" class="h" src="http://theoutdoortypes.heroku.com/images/logo-hover.png">
+            <img alt="The Outdoor Types" class="n" src="http://theoutdoortypes.co.uk/images/logo.png">
+            <img alt="" class="h" src="http://theoutdoortypes.co.uk/images/logo-hover.png">
           </a>
         </h1>
       </div>
@@ -33,19 +33,19 @@
             <a href="http://theoutdoortypes.tumblr.com" class="current">News</a>
           </li>
           <li>
-            <a href="http://theoutdoortypes.heroku.com/about">About</a>
+            <a href="http://theoutdoortypes.co.uk/about">About</a>
           </li>
           <li>
-            <a href="http://theoutdoortypes.heroku.com/shows">Shows</a>
+            <a href="http://theoutdoortypes.co.uk/shows">Shows</a>
           </li>
           <li>
-            <a href="http://theoutdoortypes.heroku.com/music">Records</a>
+            <a href="http://theoutdoortypes.co.uk/music">Records</a>
           </li>
           <li>
             <a href="http://theoutdoortypes.bigcartel.com">Shop</a>
           </li>
           <li>
-            <a href="http://theoutdoortypes.heroku.com/contact">Contact</a>
+            <a href="http://theoutdoortypes.co.uk/contact">Contact</a>
           </li>
         </ul>
       </div>
@@ -56,11 +56,13 @@
         <h1 class="twelvecol">News</h1>
         {block:Posts}
           <div class="post row">
-            <div class="post-content eightcol">
+            <div class="post-content ninecol">
             
               {block:Regular}
-                {block:Title}<h3>{Title}</h3>{/block:Title}
-                {Body}
+                <div class="eightcol">
+                  {block:Title}<h3>{Title}</h3>{/block:Title}
+                  {Body}
+                </div>
               {/block:Regular}
 
               {block:Photo}          
@@ -101,7 +103,7 @@
               
             </div>
             
-            <div class="meta fourcol last">
+            <div class="meta threecol last">
               {block:Date}
                 <h4>{block:NewDayDate}{Month} {DayOfMonth}, {Year} at {/block:NewDayDate}{12Hour}:{Minutes}{AmPm}</h4>
               {/block:Date}
@@ -176,16 +178,16 @@
               <a href="http://twitter.com/theoutdoortypes" title="Follow ODT on twitter">twitter</a>
             </li>
             <li>
-              <a href="http://twitter.com/theoutdoortypes" title="The Outdoor Types on Facebook">facebook</a>
+              <a href="http://en-gb.connect.facebook.com/pages/The-Outdoor-Types/" title="The Outdoor Types on Facebook">facebook</a>
             </li>
             <li>
-              <a href="http://twitter.com/theoutdoortypes" title="The Outdoor Types on Last FM">last.fm</a>
+              <a href="http://www.last.fm/music/The+Outdoor+Types" title="The Outdoor Types on Last FM">last.fm</a>
             </li>
             <li>
-              <a href="http://twitter.com/theoutdoortypes" title="Listen to The Outdoor Types on Bandcamp">bandcamp</a>
+              <a href="http://theoutdoortypes.bandcamp.com/" title="Listen to The Outdoor Types on Bandcamp">bandcamp</a>
             </li>
             <li>
-              <a href="http://twitter.com/theoutdoortypes" title="The Outdoor Types on Myspace">myspace</a>
+              <a href="http://www.myspace.com/theoutdoortypes" title="The Outdoor Types on Myspace">myspace</a>
             </li>
           </ul>
         </div>
