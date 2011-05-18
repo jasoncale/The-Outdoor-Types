@@ -7,12 +7,16 @@ require 'tumblr'
 require 'bandcamp'
 require 'yaml'
 require 'active_support/time'
+require 'webmock'
 
 module Outdoortypes
   class Site < Sinatra::Base
     set :haml, :format => :html5
     set :root, File.dirname(__FILE__)
-
+    
+    include WebMock::API
+    WebMock.allow_net_connect!
+    
     get '/' do
       cache_for(20.minutes)
       @shows = Outdoortypes::Event.get
@@ -42,15 +46,16 @@ module Outdoortypes
     
     get '/music' do
       cache_for(1.day)
-      @discography = band.discography.sort_by {|album| album['release_date'] }.reverse      
+      @discography = discography     
       haml :music
     end
     
     get '/music/:name' do
       cache_for(1.day)
-      @discography = band.discography.reject { |album| album['title'].downcase.gsub(/\s/, '-') == params[:name] }.sort_by {|album| album['release_date'] }.reverse
-      @album = load_album(params[:name])
-      if @album
+      @discography = discography.select { |album| album['title'].downcase.gsub(/\s/, '-') != params[:name] }            
+      @album = load_album(params[:name])  
+      
+      if @album 
         haml :album
       else
         not_found
@@ -64,11 +69,6 @@ module Outdoortypes
       @image = Tumblr::Reader.get_posts(content, :photo).sort_by { rand }.first
       @info = Tumblr::Reader.get_posts(content, :regular).first
       haml :contact
-    end
-    
-    get '/cache-test' do
-      response.headers['Cache-Control'] = 'public, max-age=300'
-      "Rendered at #{Time.now}"
     end
 
     get '/style.css' do
@@ -90,14 +90,18 @@ module Outdoortypes
     def tumblr_content(name, opts = {})
       Outdoortypes::TumblrBlog.get(name, opts)
     end
-    
-    def band
-      Bandcamp::Base.api_key = config[:bandcamp][:api_key]  
-      @band = Bandcamp::Band.load(config[:bandcamp][:band_id])
+        
+    def discography
+      stub_json_request("http://api.bandcamp.com/api/band/3/discography?band_id=#{config[:bandcamp][:band_id]}&key=#{config[:bandcamp][:api_key]}", "discography")
+      Bandcamp::Base.api_key = config[:bandcamp][:api_key]
+      return Bandcamp::Band.new({ "band_id" => config[:bandcamp][:band_id] }).discography.sort_by {|album| album['release_date'] }.reverse
     end
     
     def load_album(name)
-      if band && band.discography && album = band.discography.select {|album| album['title'].downcase.gsub(/\s/, '-') == name }.first
+      if album = discography.select {|album| album['title'].downcase.gsub(/\s/, '-') == name }.first
+        if stub_exists?("album-#{album['album_id']}")
+          stub_json_request("http://api.bandcamp.com/api/album/2/info?album_id=#{album['album_id']}&key=#{config[:bandcamp][:api_key]}", "album-#{album['album_id']}")
+        end
         album = Bandcamp::Album.load(album['album_id'])
       end
     end
@@ -109,6 +113,24 @@ module Outdoortypes
     def cache_for(seconds)
       response.headers['Cache-Control'] = "public, max-age=#{seconds.to_s}"      
     end
+        
+    def stub_json_request(url, json_file)
+      stub_request(:get, url).to_return(
+        {
+          :body => File.read(stub_file_path(json_file)),
+          :headers => { "Content-Type" => "text/json" }
+        }
+      )
+    end
+    
+    def stub_exists?(json_file)
+      File.exists?(stub_file_path(json_file))
+    end
+    
+    def stub_file_path(json_file)
+      File.dirname(__FILE__) + "/json-cache/#{json_file}.json"
+    end
+    
   end
   
   class Base
