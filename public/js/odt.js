@@ -3,6 +3,9 @@ $(document).ready(function() {
   $('.track').each(function () {
     if ($(this).attr('href')) {
       var player = jwplayer($(this).attr('id')).setup({
+        players: [
+              {type: "flash", src: "/media/player.swf"}
+        ],
         playlist: "none",
         flashplayer: "/media/player.swf", 
         duration: parseInt($(this).attr('data-duration')),
@@ -27,7 +30,7 @@ $(document).ready(function() {
       tracks.push(player);
     }
   });
-  
+
   $('.toggle-track').click(function () {
     jwplayer($(this).attr('data-track')).play();
     return false;
