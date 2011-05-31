@@ -7,6 +7,7 @@ require 'tumblr'
 require 'bandcamp'
 require 'yaml'
 require 'active_support/time'
+require 'active_support/core_ext/string/filters'
 require 'webmock'
 
 module Outdoortypes

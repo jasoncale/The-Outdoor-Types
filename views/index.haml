@@ -20,7 +20,7 @@
   %h2 Recent news  
   %h3
     %a{:href => "#{@blog_url}/post/#{@news.post_id}/#{@news.slug}"}=@news.title
-  =@news.body
+  =@news.body.truncate(400, :omission => " &hellip; <a href='#{@blog_url}/post/#{@news.post_id}/#{@news.slug}'>continue reading</a>")
    
 .twocol
   %h2 Upcoming shows
