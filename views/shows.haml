@@ -1,18 +1,18 @@
 .twelvecol
   %h1 Upcoming shows
-  
-.sixcol  
+
+.sixcol
   .frame
     %img{:src => @image.source }
-  
-- if @shows.empty?
+
+- if !@shows || @shows.empty?
   .sixcol.last
     %h2 Sorry, our diary is empty
-    %p 
-      Why don't you 
-      %a{:href => "/contact", :title => "Contact the band"}get in touch 
+    %p
+      Why don't you
+      %a{:href => "/contact", :title => "Contact the band"}get in touch
       and get us to come play near you.
--else 
+-else
   .sixcol.last
     %h2 Tour dates
     %ol#shows
