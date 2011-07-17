@@ -18,9 +18,13 @@
 
 .sixcol.last
   %h2 Recent news
-  %h3
-    %a{:href => "#{@blog_url}/post/#{@news.post_id}/#{@news.slug}"}=@news.title
-  =@news.body.truncate(400, :omission => " &hellip; <a href='#{@blog_url}/post/#{@news.post_id}/#{@news.slug}'>continue reading</a>")
+  -if @news
+    %h3
+      %a{:href => "#{@blog_url}/post/#{@news.post_id}/#{@news.slug}"}=@news.title
+    =@news.body.truncate(400, :omission => " &hellip; <a href='#{@blog_url}/post/#{@news.post_id}/#{@news.slug}'>continue reading</a>")
+  -else
+    %h3 No news, is good news?
+    %p Looks like our Tumblelog isn't being friendly right now, check back later.
 
 .twocol
   %h2 Upcoming shows

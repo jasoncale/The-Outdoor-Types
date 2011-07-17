@@ -21,9 +21,9 @@ module Outdoortypes
     get '/' do
       cache_for(20.minutes)
       @shows = Outdoortypes::Event.get
-      @review = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:reviews]), :quote).sort_by { rand }.first
-      @image = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:about]), :photo).sort_by { rand }.first
-      @news = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][:news]), :regular).first
+      @review = random_post :reviews, :quote
+      @image = random_image :about
+      @news = latest_post :news, :regular
       @blog_url = "http://#{config[:tumblr][:news]}.tumblr.com"
       haml :index
     end
