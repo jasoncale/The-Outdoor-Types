@@ -10,17 +10,17 @@
     %meta{:name=>"google-site-verification", :content => "O3k4TkTnZnZN0mFCZ27veogt324ta6oLLHmwpZK5I2I"}
     :plain
       <!--[if gte IE 7]><!-->
-        <link rel="stylesheet" href="/style.css" type="text/css" media="screen">    
+        <link rel="stylesheet" href="/style.css" type="text/css" media="screen">
       <!-- <![endif]-->
-  %body  
+  %body
     #background-image{"data-img-src" => "/images/bg.jpg"}
     #header.container
       .row
         %h1#logo.twelvecol
           %a{:href => "/"}
             %img.n{:alt => "The Outdoor Types", :src => "/images/logo.png"}
-            %img.h{:alt => "", :src => "/images/logo-hover.png"}       
-             
+            %img.h{:alt => "", :src => "/images/logo-hover.png"}
+
     #navigation.container
       .row
         %ul.clearfix
@@ -32,8 +32,6 @@
             =link_to_unless_current("Shows", '/shows', "Upcoming gig listing")
           %li
             =link_to_unless_current("Records", '/music', "Listen to ODT records")
-          %li
-            %a{:href => "http://theoutdoortypes.bigcartel.com", :title => "Buy our records etc"}Shop
           %li
             =link_to_unless_current("Contact", '/contact', "Get in touch")
     #page.container
@@ -54,7 +52,7 @@
               %a{:href => "http://theoutdoortypes.bandcamp.com/", :title => "Listen to The Outdoor Types on Bandcamp"}bandcamp
             %li
               %a{:href => "http://www.myspace.com/theoutdoortypes", :title => "The Outdoor Types on Myspace"}myspace
-        
+
         #footnotes.fourcol.last
           %p#rcdlbl.footnote
             %a#ibtp{:href => "http://www.iblametheparentsrecords.com", :title => "I Blame the Parents Records"}I Blame the Parents
@@ -63,14 +61,14 @@
             Made by
             =succeed('.') do
               %a{:href => "http://jasoncale.com", :title => "Designer etc. Go Free Range."}Jase
-                            
+
           %p.footnote
             &copy; The Outdoor Types.
             2007 &mdash;
             =succeed('.') do
               =Date.today.year
 
-    
+
     %script{:src=> "http://code.jquery.com/jquery-1.5.min.js", :type => "text/javascript", :charset => "utf-8"}
     %script{:src=> "/js/hashgrid.js", :type => "text/javascript", :charset => "utf-8"}
     %script{:src=> "/js/swfobject.js", :type => "text/javascript", :charset => "utf-8"}
