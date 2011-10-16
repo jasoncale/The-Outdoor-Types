@@ -107,6 +107,32 @@ module Outdoortypes
       end
     end
 
+    def tumblr_resque(&block)
+      begin
+        block.call
+      rescue Weary::ClientError => e
+        return nil
+      end
+    end
+
+    def random_image(section)
+      tumblr_resque do
+        Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][section]), :photo).sort_by { rand }.first
+      end
+    end
+
+    def latest_post(section, type)
+      tumblr_resque do
+        Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][section]), type).first
+      end
+    end
+
+    def random_post(section, type)
+      tumblr_resque do
+        posts = Tumblr::Reader.get_posts(tumblr_content(config[:tumblr][section]), type).sort_by { rand }.first
+      end
+    end
+
     def config
       Outdoortypes::Base.config
     end
