@@ -4,22 +4,27 @@
     %p
       Released:
       =Time.at(@album.release_date).strftime("%b %Y")
-  
+
   .fourcol
     .frame
       %img#artwork{:src => @album.large_art_url}
 
-  %ol#track-listing.eightcol.last  
-    -@album.tracks.each do |track|
-      -track_dom = "track-#{track.track_id}"
-      %li.clearfix
-        %p
-          %a.toggle-track{:href => track.streaming_url, "data-track" => track_dom }=track.title
-        -if track.streaming_url.blank?
-          %span.no-streaming Not available online
-        -else
-          %a.track{:id => track_dom, :href => track.streaming_url, "data-duration" => track.duration }Listen
-        
+  .eightcol.last
+    %ol#track-listing
+      -@album.tracks.each do |track|
+        -track_dom = "track-#{track.track_id}"
+        %li.clearfix
+          %p
+            %a.toggle-track{:href => track.streaming_url, "data-track" => track_dom }=track.title
+          -if track.streaming_url.blank?
+            %span.no-streaming Not available online
+          -else
+            %a.track{:id => track_dom, :href => track.streaming_url, "data-duration" => track.duration }Listen
+
+    -if @album.downloadable
+      %p
+        %a{:href => "#{@album.url}&action=download"} Download album (MP3)
+
 .row
   .twelvecol
     %h3 Also in the catalogue &hellip;
@@ -29,4 +34,3 @@
           .frame
             %a{:href => "/music/#{album['title'].downcase.gsub(/\s/, '-')}"}
               %img{:src => album['large_art_url']}
-  
